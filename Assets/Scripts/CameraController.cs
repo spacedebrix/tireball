@@ -5,6 +5,7 @@ public class CameraController : MonoBehaviour {
 
 	public GameObject target;
 	public float timeOut;
+	public float repositionDistance;
 
 	private bool watchTarget;
 	private bool hasTimedOut;
@@ -22,6 +23,13 @@ public class CameraController : MonoBehaviour {
 	void Update () {
 		if (watchTarget) {
 			if(hasTimedOut) {
+				if( (target.transform.position.z - transform.position.z ) > repositionDistance )
+				{
+					transform.position = new Vector3( transform.position.x,
+					                                  transform.position.y,
+					                                 transform.position.z + (2 * repositionDistance ) );
+				}
+
 				transform.LookAt (target.transform);
 			}
 			else {
