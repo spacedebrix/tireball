@@ -27,6 +27,7 @@ public class BatController : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			myRigidBody.velocity = swingSpeed;
+			GetComponents<AudioSource>()[0].Play();
 		}
 	}
 
@@ -49,7 +50,7 @@ public class BatController : MonoBehaviour {
 			mainCamera.WatchTire ();
 			Vector3 scaler = defaultScaler * (myRigidBody.velocity.z / 10);
 			Debug.Log( "scaler = " + scaler );
-			float heightScaler = (1/(1.4f - tireRigidBody.transform.position.y));
+			float heightScaler = (1/(1.5f - tireRigidBody.transform.position.y));
 			Debug.Log( "tire height = " + tireRigidBody.transform.position.y + ", scaler = " + heightScaler );
 			scaler = Vector3.Scale(scaler, new Vector3( 1, heightScaler, 1) );
 			Debug.Log( "final scaler = " + scaler );
@@ -59,6 +60,9 @@ public class BatController : MonoBehaviour {
 		
 			hasCollided = true;
 			tire.Batted();
+
+			GetComponents<AudioSource>()[1].Play();
+
 		}
 
 	}

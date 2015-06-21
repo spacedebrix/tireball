@@ -14,11 +14,11 @@ public class GameController : MonoBehaviour {
 	public Text gameOverText;
 	public float endingTime;
 
-	private float score;
+	private long score;
 	private GameStage_e myGameStage;
 	
 	void Start () {
-		score = 0.0f;
+		score = 0;
 		myGameStage = GameStage_e.GS_PLAYING;
 	}
 
@@ -55,14 +55,14 @@ public class GameController : MonoBehaviour {
 
 		float velocityPoints = velocity.z * 10.0f;
 		velocityPoints *= velocityPoints;
-		score += velocityPoints;
+		score += Mathf.CeilToInt( velocityPoints );
 
 		float positionPoints = position.y;
 		position *= 10;
 		position /= (100.0f / velocity.z);
-		score += positionPoints;
+		score += Mathf.CeilToInt( positionPoints );
 
-		scoreText.text = "Score: " + Mathf.CeilToInt (score);
+		scoreText.text = "Score: " + score;
 	}
 
 	public void PlayerMissed() {

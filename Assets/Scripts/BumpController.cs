@@ -21,6 +21,8 @@ public class BumpController : MonoBehaviour {
 			Vector3 newVelocity = rb.velocity;
 			newVelocity.y = (-Physics.gravity.y) * (Physics.gravity.y / rb.velocity.z);
 			rb.velocity = newVelocity;
+
+			GetComponent<AudioSource>().Play ();
 		}
 
 	}
