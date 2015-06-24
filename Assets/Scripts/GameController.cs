@@ -16,23 +16,31 @@ public class GameController : MonoBehaviour {
 
 	private long score;
 	private GameStage_e myGameStage;
+	private DatabaseAccessor databaseAccessor;
 	
 	void Start () {
 		score = 0;
 		myGameStage = GameStage_e.GS_PLAYING;
+
+		GameObject go = GameObject.Find ("GlobalData");
+		databaseAccessor = go.GetComponent<DatabaseAccessor> ();
 	}
 
 	void Restart() {
 		Application.LoadLevel( Application.loadedLevel );
 	}
 
+	void LoadTitle() {
+		Application.LoadLevel ("Title");
+	}
+
 	void HandleInput() {
-		if (Input.GetKeyDown (KeyCode.R)) {
+		if (Input.GetKeyDown (KeyCode.R) || Input.GetMouseButtonDown( 1 )) {
 			Restart ();
 		}
 		if (myGameStage == GameStage_e.GS_ENDED) {
-			if( Input.GetKeyDown( KeyCode.Space ) ) {
-				Restart ();
+			if( Input.GetKeyDown( KeyCode.Space ) || Input.GetMouseButtonDown( 0 ) ) {
+				LoadTitle ();
 			}
 		}
 	}
@@ -46,6 +54,8 @@ public class GameController : MonoBehaviour {
 			if( 0 > endingTime ) {
 				myGameStage = GameStage_e.GS_ENDED;
 				gameOverText.enabled = true;
+
+				databaseAccessor.SaveHighScore( score, "Butt" );
 			}
 		}
 	}

@@ -25,7 +25,7 @@ public class BatController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.Space)) {
+		if (Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown( 0 )) {
 			myRigidBody.velocity = swingSpeed;
 			GetComponents<AudioSource>()[0].Play();
 		}
