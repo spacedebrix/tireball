@@ -55,7 +55,7 @@ public class GameController : MonoBehaviour {
 				myGameStage = GameStage_e.GS_ENDED;
 				gameOverText.enabled = true;
 
-				databaseAccessor.SaveHighScore( score, "Butt" );
+				databaseAccessor.SaveHighScore( score );
 			}
 		}
 	}
